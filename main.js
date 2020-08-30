@@ -85,13 +85,20 @@ function getFirstIpAddress(cidrStr, callback) {
   } else {
     // If the passed CIDR is valid, call the object's toArray() method.
     // Notice the destructering assignment syntax to get the value of the first array's element.
-    [firstIpAddress] = cidr.toArray(options);
+    // [firstIpAddress] = cidr.toArray(options);
+    // let ipv6 = getIpv4MappedIpv6Address(firstIpAddress);
+    var ipConvert = {
+        ipv4: cidr.toArray(options),
+        ipv6: getIpv4MappedIpv6Address(172.16.10.1);
+    }    
   }
+  console.log(ipConvert);
+
   // Call the passed callback function.
   // Node.js convention is to pass error data as the first argument to a callback.
   // The IAP convention is to pass returned data as the first argument and error
   // data as the second argument to the callback function.
-  return callback(firstIpAddress, callbackError);
+  return callback(ipConvert, callbackError);
 }
 
 /*
@@ -122,13 +129,13 @@ function main() {
   }
   // Iterate over sampleIpv4s and pass the element's value to getIpv4MappedIpv6Address().
   for (let i = 0; i < sampleIpv4sLen; i++) {
-    console.log(`\n--- Test Number ${i + 1} getIpv4MappedIpv6Address(${sampleIpv4s[i]}) ---`);
+    // console.log(`\n--- Test Number ${i + 1} getIpv4MappedIpv6Address(${sampleIpv4s[i]}) ---`);
     // Assign the function results to a variable so we can check if a string or null was returned.
     let mappedAddress = getIpv4MappedIpv6Address(sampleIpv4s[i]);
     if( mappedAddress ) {
-      console.log(`  IPv4 ${sampleIpv4s[i]} mapped to IPv6 Address: ${mappedAddress}`);
+      // console.log(`  IPv4 ${sampleIpv4s[i]} mapped to IPv6 Address: ${mappedAddress}`);
     } else {
-      console.error(`  Problem converting IPv4 ${sampleIpv4s[i]} into a mapped IPv6 address.`);
+      // console.error(`  Problem converting IPv4 ${sampleIpv4s[i]} into a mapped IPv6 address.`);
     }
   }
 }
