@@ -24,7 +24,6 @@ const { getIpv4MappedIpv6Address } = require(path.join(__dirname, 'ipv6.js'));
 const IPCIDR = require('ip-cidr');
 
 
-
 class IpAddress {
   constructor() {
     // IAP's global log object is used to output errors, warnings, and other
@@ -40,7 +39,7 @@ class IpAddress {
     * @param {callback} callback - A callback function.
     * @return {object} (ipConvert) - An object with IPv4 and IPv6 addresses.
     */
-    getFirstIpAddress(cidrStr, callback); {
+    getFirstIpAddress(cidrStr, callback) 
 
     // Initialize return arguments for callback
     let firstIpAddress = null;
@@ -89,6 +88,4 @@ class IpAddress {
     return callback(JSON.stringify(ipConvert), callbackError);
     }
   }
-}
-
 module.exports = new IpAddress;
