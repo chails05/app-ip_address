@@ -34,60 +34,60 @@ class IpAddress {
     // under Documentation -> Developer Guides -> Log Class Guide
     log.info('Starting the IpAddress product.');
     /**
- * Calculate and return the first host IP address from a CIDR subnet.
- * @param {string} cidrStr - The IPv4 subnet expressed
- *                 in CIDR format.
- * @param {callback} callback - A callback function.
- * @return {object} (ipConvert) - An object with IPv4 and IPv6 addresses.
- */
-getFirstIpAddress(cidrStr, callback) {
+    * Calculate and return the first host IP address from a CIDR subnet.
+    * @param {string} cidrStr - The IPv4 subnet expressed
+    *                 in CIDR format.
+    * @param {callback} callback - A callback function.
+    * @return {object} (ipConvert) - An object with IPv4 and IPv6 addresses.
+    */
+    getFirstIpAddress(cidrStr, callback); {
 
-  // Initialize return arguments for callback
-  let firstIpAddress = null;
-  let callbackError = null;
+    // Initialize return arguments for callback
+    let firstIpAddress = null;
+    let callbackError = null;
 
-  // Instantiate an object from the imported class and assign the instance to variable cidr.
-  const cidr = new IPCIDR(cidrStr);
-  // Initialize options for the toArray() method.
-  // We want an offset of one and a limit of one.
-  // This returns an array with a single element, the first host address from the subnet.
-  const options = {
-    from: 1,
-    limit: 1
-  };
+    // Instantiate an object from the imported class and assign the instance to variable cidr.
+    const cidr = new IPCIDR(cidrStr);
+    // Initialize options for the toArray() method.
+    // We want an offset of one and a limit of one.
+    // This returns an array with a single element, the first host address from the subnet.
+    const options = {
+        from: 1,
+        limit: 1
+    };
 
-  // Use the object's isValid() method to verify the passed CIDR.
-  if (!cidr.isValid()) {
-    // If the passed CIDR is invalid, set an error message.
-    callbackError = 'Error: Invalid CIDR passed to getFirstIpAddress.';
-    var ipConvert = {
-        "ipv4": "null",
-        "ipv6": "null"
-    }    
-  } else {
-    // If the passed CIDR is valid, call the object's toArray() method.
-    // Notice the destructering assignment syntax to get the value of the first array's element.
-    // [firstIpAddress] = cidr.toArray(options);
-    // let ipv6 = getIpv4MappedIpv6Address(firstIpAddress);
-    var ipConvert = {
-        "ipv4": cidr.toArray(options)[0],
-        // "ipv6": getIpv4MappedIpv6Address('172.16.10.1')
-        "ipv6": getIpv4MappedIpv6Address(cidr.toArray(options)[0])
-        // "ipv6": getIpv4MappedIpv6Address(self.ipv4)
-    }    
-  }
-  // console.log(ipConvert);
-  // console.log(ipConvert.ipv4);
-  // console.log(ipConvert.ipv6);
-  // console.log(cidr)
+    // Use the object's isValid() method to verify the passed CIDR.
+    if (!cidr.isValid()) {
+        // If the passed CIDR is invalid, set an error message.
+        callbackError = 'Error: Invalid CIDR passed to getFirstIpAddress.';
+        var ipConvert = {
+            "ipv4": "null",
+            "ipv6": "null"
+        }    
+    } else {
+        // If the passed CIDR is valid, call the object's toArray() method.
+        // Notice the destructering assignment syntax to get the value of the first array's element.
+        // [firstIpAddress] = cidr.toArray(options);
+        // let ipv6 = getIpv4MappedIpv6Address(firstIpAddress);
+        var ipConvert = {
+            "ipv4": cidr.toArray(options)[0],
+            // "ipv6": getIpv4MappedIpv6Address('172.16.10.1')
+            "ipv6": getIpv4MappedIpv6Address(cidr.toArray(options)[0])
+            // "ipv6": getIpv4MappedIpv6Address(self.ipv4)
+        }    
+    }
+    // console.log(ipConvert);
+    // console.log(ipConvert.ipv4);
+    // console.log(ipConvert.ipv6);
+    // console.log(cidr)
 
-  // Call the passed callback function.
-  // Node.js convention is to pass error data as the first argument to a callback.
-  // The IAP convention is to pass returned data as the first argument and error
-  // data as the second argument to the callback function.
-  // JSON.parse(JSON.stringify(ipConvert))
-  return callback(JSON.stringify(ipConvert), callbackError);
-}
+    // Call the passed callback function.
+    // Node.js convention is to pass error data as the first argument to a callback.
+    // The IAP convention is to pass returned data as the first argument and error
+    // data as the second argument to the callback function.
+    // JSON.parse(JSON.stringify(ipConvert))
+    return callback(JSON.stringify(ipConvert), callbackError);
+    }
   }
 }
 
